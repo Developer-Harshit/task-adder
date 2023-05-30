@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Task Adder</title>
+		<script src="lib/vue.js"></script>
+		<script src="lib/tailwind.js" defer></script>
+		<script src="app.js" defer></script>
+	</head>
+	<body id="app" class="bg-slate-700 text-slate-400 font-mono font-semibold">
+		<header :class="tClass.header">
+			<div class="logo h-11 w-11 bg-blue-950"></div>
+			<h1 id="site-name">Task Adder</h1>
+		</header>
+		<div class="line-break" :class="tClass.lineBreak"></div>
+		<br />
+		<main>
+			<div>
+				<h2 :class="tClass.h2">Create Tasks</h2>
+				<form
+					action="index.html"
+					id="task-form"
+					class="text-center"
+					@submit.prevent="saveTask"
+				>
+					<label for="add-task"> Add Task</label>
+					<input
+						id="add-task"
+						:class="tClass.input"
+						type="text"
+						v-model="inputText"
+						@focus="isInputActive = true"
+						@blur="isInputActive = false"
+					/>
+				</form>
+				<br />
+				<div class="bg-slate-800">
+					<div class="line-break" :class="tClass.lineBreak"></div>
+					<br />
+					<h2 :class="tClass.h2">Your Tasks</h2>
+					<ol id="task-container" :class="tClass.ol">
+						<li
+							class="task-item"
+							:class="tClass.list"
+							v-if="!inputText.length == 0 || isInputActive"
+						>
+							<p class="inline-block align-[-webkit-baseline-middle]">
+								{{inputText}}
+							</p>
+						</li>
+						<li v-for="task in tasks" class="task-item" :class="tClass.list">
+							<p class="inline-block align-[-webkit-baseline-middle]">
+								{{task}}
+							</p>
+						</li>
+					</ol>
+					<br />
+					<div class="line-break" :class="tClass.lineBreak"></div>
+				</div>
+			</div>
+		</main>
+	</body>
+	<link rel="stylesheet" href="base.css" />
+</html>
